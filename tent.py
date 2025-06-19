@@ -13,7 +13,7 @@ st.write("""
 if 'name_input' not in st.session_state:
     st.session_state.name_input = ""
 if 'used_before_input' not in st.session_state:
-    st.session_state.used_before_input = 1 # Default rating
+    st.session_state.used_before_input = 0 # Default rating
 if 'rating_input' not in st.session_state:
     st.session_state.rating_input = 3 # Default rating
 if 'favorites_input' not in st.session_state:
@@ -51,7 +51,7 @@ def handle_feedback_submission(name, used_before, rating, favorites, comments):
     # --- CLEARING THE FORM FIELDS ---
     # Reset the session state variables linked to the input widgets' 'value' parameter
     st.session_state.name_input = ""
-    st.session_state.used_before_input = 1 # Reset to default
+    st.session_state.used_before_input = 0 # Reset to default
     st.session_state.rating_input = 3
     st.session_state.favorites_input = ""
     st.session_state.comments_input = ""

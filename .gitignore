@@ -1,0 +1,7 @@
+# Ignore Streamlit secrets file
+.streamlit/secrets.toml
+
+# Ignore virtual environments
+.venv/
+venv/
+streamlit_env/ # If you use this specific name
