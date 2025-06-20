@@ -4,7 +4,14 @@ from database import init_db, insert_feedback, clear_feedback
 import pandas as pd
 from textblob import TextBlob
 from datetime import datetime
+import nltk
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from textblob import download_corpora
+download_corpora()
+
+from setup_corpora import download_corpora_files
+download_corpora_files()
+
 
 analyzer = SentimentIntensityAnalyzer()
 
