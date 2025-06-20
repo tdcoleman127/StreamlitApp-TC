@@ -6,12 +6,7 @@ from datetime import datetime
 import nltk
 nltk.data.path.append("./assets/nltk_data")
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-from textblob import TextBlob, download_corpora
-
-sample = TextBlob("I like this app")
-print(sample.sentiment)
-
-
+from textblob import TextBlob
 analyzer = SentimentIntensityAnalyzer()
 
 init_db()  # Create the DB table if it doesn't exist
