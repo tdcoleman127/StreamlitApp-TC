@@ -2,13 +2,15 @@ import sqlite3
 import streamlit as st
 from database import init_db, insert_feedback, clear_feedback
 import pandas as pd
-from textblob import TextBlob
 from datetime import datetime
 import nltk
+nltk.data.path.append("./assets/nltk_data")
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from textblob import TextBlob, download_corpora
 
-from textblob import download_corpora
-download_corpora()
+sample = TextBlob("I like this app")
+print(sample.sentiment)
+
 
 analyzer = SentimentIntensityAnalyzer()
 
