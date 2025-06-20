@@ -8,7 +8,6 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 analyzer = SentimentIntensityAnalyzer()
 
-
 init_db()  # Create the DB table if it doesn't exist
 
 st.title("📝 Tent Feedback Form")
