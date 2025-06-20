@@ -7,8 +7,13 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from textblob import TextBlob
 from database import init_db, insert_feedback, clear_feedback
 analyzer = SentimentIntensityAnalyzer()
+import os
 
+# Set the path for NLTK data
+nltk.data.path.append("./assets/nltk_data")
 
+# Set the path for TextBlob data
+os.environ["TEXTBLOB_DATA_DIR"] = "./assets/nltk_data"
 init_db()  # Create the DB table if it doesn't exist
 
 st.title("📝 Tent Feedback Form")
