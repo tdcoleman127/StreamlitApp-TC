@@ -1,2 +1,2 @@
-from textblob import download_corpora
-download_corpora.download_all()
+import nltk
+nltk.download('wordnet')
