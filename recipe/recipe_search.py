@@ -3,6 +3,45 @@ import streamlit as st
 from spoonacular_api import call_spoonacular_api
 
 API_KEY = st.secrets["SPOONACULAR_API_KEY"]
+USE_MOCK_API = st.secrets.get("USE_MOCK_API", False)
+mock_recipe_response = [
+    {
+        "id": 123456,
+        "title": "Spicy Chicken and Rice",
+        "image": "https://via.placeholder.com/312x231.png?text=Mock+Chicken+Recipe",
+        "imageType": "jpg",
+        "usedIngredientCount": 2,
+        "missedIngredientCount": 1,
+        "likes": 157
+    },
+    {
+        "id": 789012,
+        "title": "Tomato Basil Pasta",
+        "image": "https://via.placeholder.com/312x231.png?text=Mock+Pasta+Recipe",
+        "imageType": "jpg",
+        "usedIngredientCount": 1,
+        "missedIngredientCount": 2,
+        "likes": 204
+    }
+]
+
+mock_recipe_info = {
+    "id": 123456,
+    "title": "Spicy Chicken and Rice",
+    "image": "https://via.placeholder.com/480x360.png?text=Mock+Full+Recipe",
+    "readyInMinutes": 45,
+    "servings": 4,
+    "summary": "A flavorful mock dish made with spiced chicken and fluffy rice, great for testing your app UI!",
+    "instructions": (
+        "1. Heat oil in a skillet over medium heat.\n"
+        "2. Add chicken, season, and cook thoroughly.\n"
+        "3. Stir in cooked rice and tomatoes.\n"
+        "4. Simmer for 10 minutes. Serve hot."
+    ),
+    "sourceUrl": "https://example.com/mock-spicy-chicken-and-rice"
+}
+
+
 # Helper function to make API requests with error handling
 def call_spoonacular_api(endpoint, params=None):
     BASE_URL = "https://api.spoonacular.com"
@@ -40,6 +79,8 @@ def call_spoonacular_api(endpoint, params=None):
 
 # Function to fetch recipes based on ingredients
 def get_recipes_by_ingredients(ingredients):
+    if USE_MOCK_API:
+        return mock_recipe_response
     params = {
         "ingredients": ",".join(ingredients),
         "number": 5,
@@ -51,12 +92,17 @@ def get_recipes_by_ingredients(ingredients):
 
 # Function to fetch full recipe information based on recipe ID
 def get_recipe_info(recipe_id):
+    if USE_MOCK_API:
+        return mock_recipe_info
     params = {}
     return call_spoonacular_api(f"recipes/{recipe_id}/information", params)
 
 
 # Main interaction function
 def run_recipe_app():
+    if USE_MOCK_API:
+        st.info("🧪 Mock mode enabled – No real API calls are being made.")
+
     st.warning("🛠️ This app is currently under development")
     st.title("🥦 Welcome to RecipeTent™!")
     st.subheader("🍳'Cook with confidence!'")
