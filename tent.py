@@ -1,13 +1,13 @@
 import sqlite3
 import streamlit as st
-from database import init_db, insert_feedback, clear_feedback
 import pandas as pd
 from datetime import datetime
 import nltk
-nltk.data.path.append("./assets/nltk_data")
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from textblob import TextBlob
+from database import init_db, insert_feedback, clear_feedback
 analyzer = SentimentIntensityAnalyzer()
+
 
 init_db()  # Create the DB table if it doesn't exist
 
