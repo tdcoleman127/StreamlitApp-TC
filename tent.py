@@ -5,7 +5,7 @@ import pandas as pd
 from database.feedback import insert_feedback, get_feedback, clear_feedback
 from analysis.sentiment import analyze_textblob, analyze_vader
 from analysis.keywords import extract_keywords
-
+from dummy_ui import dummy_code
 # ---------------------------
 # SECTION: USER FEEDBACK FORM
 # ---------------------------
@@ -87,6 +87,7 @@ def main():
     st.sidebar.title("🧭 Navigation")
     mode = st.sidebar.selectbox("Choose a view", ["User Feedback", "Admin Dashboard"])
     if mode == "User Feedback":
+        dummy_code()
         feedback_form()
     else:
         admin_view()

@@ -3,7 +3,6 @@ import random
 
 def dummy_code():
     # --- Basic Title and Introduction ---
-    st.set_page_config(page_title="SmartPlanner (Beta)", page_icon="🧠")
     st.title("🧠 SmartPlanner — Beta Test")
     st.markdown("""
     Welcome! This is a very early version of a simple planner tool.
