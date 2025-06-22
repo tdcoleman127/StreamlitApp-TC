@@ -4,4 +4,6 @@
 # Ignore virtual environments
 .venv/
 venv/
-streamlit_env/ # If you use this specific name
+streamlit_env/
+
+test_submit.py

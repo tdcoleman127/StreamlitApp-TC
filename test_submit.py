@@ -1,44 +1,72 @@
-from datetime import datetime, timedelta
-import sqlite3
+import requests
+import random
+import time
+import json
+import os
 
-def submit_test_feedback(name, used_before, rating, favorites, comments, timestamp):
-    conn = sqlite3.connect("feedback.db")
-    c = conn.cursor()
-    c.execute(
-        '''INSERT INTO feedback (name, used_before, rating, favorites, comments, timestamp)
-           VALUES (?, ?, ?, ?, ?, ?)''',
-        (name, used_before, rating, favorites, comments, timestamp)
-    )
-    conn.commit()
-    conn.close()
-    print(f"✅ Submitted feedback from {name} at {timestamp}")
+# Load secrets or set manually
+SUPABASE_URL = os.getenv("SUPABASE_URL") or "https://iueiwlwfhigbeowflzzd.supabase.co"
+SUPABASE_KEY = os.getenv("SUPABASE_KEY") or "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1ZWl3bHdmaGlnYmVvd2ZsenpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA1NDAyMzksImV4cCI6MjA2NjExNjIzOX0.U_xXXIovEQRrHlHMep2_KlfGqQFoxkTpXJfjmcM4WHw"
 
-# Simulate 20 feedback entries with staggered timestamps and stronger sentiment
-base_time = datetime.now()
-sample_feedback = [
-    ("Lena", "Yes", 5, "Super intuitive layout", "I absolutely love this interface — smooth and fast."),
-    ("Milo", "No", 1, "Colors?", "Terrible UX. I had no idea what I was clicking."),
-    ("Aria", "Yes", 4, "Minimalist color scheme", "Sleek and clean. I appreciated the aesthetic."),
-    ("Zane", "No", 2, "The menu", "So confusing. Buttons didn’t make sense."),
-    ("Nova", "Yes", 5, "All of it", "Beautifully designed. I enjoyed every second."),
-    ("Ivy", "No", 3, "The homepage", "It’s okay. Nothing stood out too much."),
-    ("Theo", "Yes", 1, "The fact that it loaded", "Honestly... this was rough to use."),
-    ("June", "No", 4, "Animations", "Loved the flow between pages. Super satisfying."),
-    ("Ezra", "Yes", 2, "Nothing specific", "Didn't enjoy it. Seemed clunky."),
-    ("Niko", "No", 5, "Dark mode and fonts", "Everything was just *right*. Seriously pro work."),
-    ("Elle", "Yes", 3, "Font spacing", "Decent. Could be a little more engaging."),
-    ("Sage", "No", 1, "I guess the logo?", "Everything else was slow and broken."),
-    ("Wren", "Yes", 4, "Simplicity", "Very easy to use. Would recommend."),
-    ("Beau", "No", 2, "Side nav bar", "Still not sure where I was supposed to go."),
-    ("Liv", "Yes", 5, "User flow", "WOW. Best UX I’ve seen in a while."),
-    ("Remy", "No", 3, "Responsiveness", "Fine on desktop. Mobile was kind of laggy."),
-    ("Lux", "Yes", 4, "Subtle animations", "Tastefully done. Impressed."),
-    ("Orion", "No", 2, "Search bar", "Didn’t work half the time."),
-    ("Nia", "Yes", 5, "Layout, icons, colors", "Everything was flawless."),
-    ("Kai", "No", 1, "Spacing maybe?", "Didn’t like anything, honestly.")
+HEADERS = {
+    "apikey": SUPABASE_KEY,
+    "Authorization": f"Bearer {SUPABASE_KEY}",
+    "Content-Type": "application/json"
+}
+
+FEEDBACK_ENDPOINT = f"{SUPABASE_URL}/rest/v1/feedback"
+
+names = [
+    "Liam", "Olivia", "Noah", "Emma", "Ava",
+    "James", "Sophia", "Isabella", "Lucas", "Mia",
+    "Elijah", "Charlotte", "Amelia", "Benjamin", "Harper",
+    "Henry", "Evelyn", "Jack", "Abigail", "Ella"
 ]
 
-# Submit all with staggered timestamps (1 entry per day back)
-for i, entry in enumerate(sample_feedback):
-    fake_time = (base_time - timedelta(days=i)).strftime("%Y-%m-%d %H:%M:%S")
-    submit_test_feedback(*entry, fake_time)
+ratings = [1, 2, 3, 4, 5]
+
+favorites_pool = [
+    "I loved how smooth the navigation was.",
+    "The visuals were really calming.",
+    "Quick responses and intuitive layout.",
+    "No bugs, and I really liked the onboarding.",
+    "Worked better than I expected.",
+    "Good experience overall.",
+    "It was okay, but nothing stood out.",
+    "I’m not sure what I liked.",
+    "Not much felt impressive honestly.",
+    "The home page was decent, not much else.",
+]
+
+comments_pool = [
+    "The buttons are a bit confusing.",
+    "I wish there were more customization options.",
+    "Took me a while to find the submit feature.",
+    "Loading felt slow at times.",
+    "It could use a dark mode option.",
+    "Great design, no issues really.",
+    "Felt smooth and professional.",
+    "Boring, nothing unique.",
+    "App kept freezing on me.",
+    "I didn’t enjoy it much at all.",
+]
+
+def generate_feedback_entry(name):
+    return {
+        "name": name,
+        "used_before": random.choice(["Yes", "No"]),
+        "rating": random.choice(ratings),
+        "favorites": random.choice(favorites_pool),
+        "comments": random.choice(comments_pool)
+    }
+
+def submit_feedback(entry):
+    response = requests.post(FEEDBACK_ENDPOINT, headers=HEADERS, json=entry)
+    return response.status_code, response.text
+
+if __name__ == "__main__":
+    for name in names:
+        entry = generate_feedback_entry(name)
+        status, text = submit_feedback(entry)
+        print(f"{name}: {status} - {text}")
+        time.sleep(0.3)  # light delay to avoid rate limiting
