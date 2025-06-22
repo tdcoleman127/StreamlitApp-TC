@@ -90,7 +90,3 @@ def main():
         feedback_form()
     else:
         admin_view()
-
-
-if __name__ == "__main__":
-    main()
