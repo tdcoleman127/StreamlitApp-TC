@@ -16,7 +16,7 @@ def feedback_form():
     used_before = st.radio("Have you used the app before?", ["Yes", "No"])
     rating = st.slider("Rate the app", 1, 5)
     favorites = st.text_area("What are your favorite features?")
-    comments = st.text_area("Any other thoughts?")
+    comments = st.text_area("Any comments or suggestions?")
 
     if st.button("Submit Feedback"):
         if all([name, used_before, favorites, comments]):
