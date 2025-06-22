@@ -90,3 +90,4 @@ def main():
         feedback_form()
     else:
         admin_view()
+main()
