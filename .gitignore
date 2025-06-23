@@ -7,3 +7,5 @@ venv/
 streamlit_env/
 
 test_submit.py
+
+.env

@@ -1,8 +1,12 @@
 import streamlit as st
 import requests
 
-# Spoonacular API key
-API_KEY = "3b604447eeec4cb8b8e2830021d758cf"  # Replace this with your actual API key
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  # take environment variables from .env
+
+API_KEY = os.getenv("SPOONACULAR_API_KEY")
 
 def run_recipe_app():
     st.title("🥦 Welcome to RecipeTent!")
