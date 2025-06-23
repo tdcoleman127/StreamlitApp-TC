@@ -1,21 +1,23 @@
 import streamlit as st
 import pandas as pd
-
+# "Clean out the fridge"
 # Modular imports
 from database.feedback import insert_feedback, get_feedback, clear_feedback
 from analysis.sentiment import analyze_textblob, analyze_vader
 from analysis.keywords import extract_keywords
-from dummy_ui import dummy_code
+# from dummy_ui import dummy_code
+from recipe.recipe_search import run_recipe_app
+
 # ---------------------------
 # SECTION: USER FEEDBACK FORM
 # ---------------------------
 def feedback_form():
-    st.title("📋 User Feedback Form")
+    st.title("📋 RecipeTent Feedback Form")
 
     name = st.text_input("Your Name")
-    used_before = st.radio("Have you used the app before?", ["Yes", "No"])
+    used_before = st.radio("Have you used Streamlit apps before?", ["Yes", "No"])
     rating = st.slider("Rate the app", 1, 5)
-    favorites = st.text_area("What are your favorite features?")
+    favorites = st.text_area("What were your favorite features?")
     comments = st.text_area("Any comments or suggestions?")
 
     if st.button("Submit Feedback"):
@@ -87,7 +89,7 @@ def main():
     st.sidebar.title("🧭 Navigation")
     mode = st.sidebar.selectbox("Choose a view", ["User Feedback", "Admin Dashboard"])
     if mode == "User Feedback":
-        dummy_code()
+        run_recipe_app()
         feedback_form()
     else:
         admin_view()
