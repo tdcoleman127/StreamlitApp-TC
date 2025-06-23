@@ -10,8 +10,10 @@ API_KEY = os.getenv("SPOONACULAR_API_KEY")
 
 def run_recipe_app():
     st.title("🥦 Welcome to RecipeTent!")
-    st.subheader("'Cook with confidence!'")
-    st.write("Type in a few ingredients, you'll get a recipe from them! Or make a new one for you!")
+    st.warning("🛠️ This app is currently under development")
+    st.image("assets/mylogo.png", width=200)
+    st.subheader("🍳'Cook with confidence!'")
+    st.subheader("Type in a few ingredients, and get a recipe from them!")
 
     # User input
     ingredients_input = st.text_input("Enter ingredients (comma separated)", "chicken, rice, tomatoes")
