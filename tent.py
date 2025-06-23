@@ -18,10 +18,10 @@ API_KEY = os.getenv("SPOONACULAR_API_KEY")
 # ---------------------------
 def feedback_form():
     st.title("📋 RecipeTent Feedback Form")
-
+    st.subheader("Please give us feedback on your experience")
     name = st.text_input("Your Name")
-    used_before = st.radio("Have you used Streamlit apps before?", ["Yes", "No"])
-    rating = st.slider("Rate the app", 1, 5)
+    used_before = st.radio("Have you used Streamlit before? (The platform used to make this app)", ["Yes", "No"])
+    rating = st.slider("Please rate this app between 1 (Poor) and 5 (Excellent)", 1, 5)
     favorites = st.text_area("What were your favorite features?")
     comments = st.text_area("Any comments or suggestions?")
 
@@ -29,7 +29,7 @@ def feedback_form():
         if all([name, used_before, favorites, comments]):
             status, msg = insert_feedback(name, used_before, rating, favorites, comments)
             if status == 201:
-                st.success("✅ Feedback submitted!")
+                st.success("✅ Submitted! Thanks for your feedback!")
             else:
                 st.error(f"❌ Submission failed: {msg}")
         else:
