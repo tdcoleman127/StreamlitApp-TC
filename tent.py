@@ -7,7 +7,12 @@ from analysis.sentiment import analyze_textblob, analyze_vader
 from analysis.keywords import extract_keywords
 # from dummy_ui import dummy_code
 from recipe.recipe_search import run_recipe_app
+from dotenv import load_dotenv
+import os
 
+load_dotenv()  # take environment variables from .env
+
+API_KEY = os.getenv("SPOONACULAR_API_KEY")
 # ---------------------------
 # SECTION: USER FEEDBACK FORM
 # ---------------------------
