@@ -2,7 +2,7 @@ import requests
 import streamlit as st
 
 def call_spoonacular_api(endpoint: str, params: dict = None):
-    API_KEY = st.secrets.get("SPOONACULAR_API_KEY", "")  # Secure key management
+    API_KEY = st.secrets["SPOONACULAR_API_KEY"]
     BASE_URL = "https://api.spoonacular.com"
     headers = {"Content-Type": "application/json"}
 

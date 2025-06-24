@@ -1,14 +1,8 @@
 import requests
 import streamlit as st
-
-from dotenv import load_dotenv
-import os
 from spoonacular_api import call_spoonacular_api
 
-load_dotenv()  # take environment variables from .env
-
-API_KEY = os.getenv("SPOONACULAR_API_KEY")
-
+API_KEY = st.secrets["SPOONACULAR_API_KEY"]
 # Helper function to make API requests with error handling
 def call_spoonacular_api(endpoint, params=None):
     BASE_URL = "https://api.spoonacular.com"
