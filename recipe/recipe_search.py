@@ -57,8 +57,13 @@ def get_recipe_info(recipe_id):
 
 # Main interaction function
 def run_recipe_app():
+    st.warning("🛠️ This app is currently under development")
+    st.title("🥦 Welcome to RecipeTent™!")
+    st.subheader("🍳'Cook with confidence!'")
+    st.image("assets/mylogo.png", width=200)
+    st.subheader("Type in a few ingredients, and get a recipe from them!")
     # User input: ingredients list
-    ingredients_input = st.text_input("Enter ingredients below separated by commas (an example is given)")
+    ingredients_input = st.text_input("Enter ingredients below separated by commas (Ex. beans, greens, potatoes)")
     ingredients_list = [i.strip() for i in ingredients_input.split(",") if i.strip()]
 
     if not ingredients_list:
