@@ -5,7 +5,5 @@
 .venv/
 venv/
 streamlit_env/
-
-test_submit.py
-
 .env
+test_submit.py
