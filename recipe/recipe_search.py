@@ -64,7 +64,7 @@ def get_recipe_info(recipe_id):
 # Main interaction function
 def run_recipe_app():
     # User input: ingredients list
-    ingredients_input = st.text_input("Enter ingredients below separated by commas (an example is given)", "chicken, rice, tomatoes")
+    ingredients_input = st.text_input("Enter ingredients below separated by commas (an example is given)")
     ingredients_list = [i.strip() for i in ingredients_input.split(",") if i.strip()]
 
     if not ingredients_list:
