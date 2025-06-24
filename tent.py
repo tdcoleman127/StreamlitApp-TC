@@ -7,19 +7,23 @@ from analysis.sentiment import analyze_textblob, analyze_vader
 from analysis.keywords import extract_keywords
 # from dummy_ui import dummy_code
 from recipe.recipe_search import run_recipe_app
+import streamlit.components.v1 as components
 
 API_KEY = st.secrets["SPOONACULAR_API_KEY"]
 
 # Inject Microsoft Clarity script
-st.markdown("""
+components.html(
+    """
     <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "s3sokxeysl");
-</script>
-""", unsafe_allow_html=True)
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/YOUR_PROJECT_ID";
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "YOUR_PROJECT_ID");
+    </script>
+    """,
+    height=0,
+)
 
 # ---------------------------
 # SECTION: USER FEEDBACK FORM
