@@ -68,7 +68,7 @@ def run_recipe_app():
         st.info("🧪 Mock mode enabled – No real API calls are being made.")
 
     st.warning("🛠️ This app is currently under development")
-    st.title("🥦 Welcome to RecipeTent™!")
+    st.title("🥦 Welcome to the RecipeTent™!")
     st.subheader("🍳'Cook with confidence!'")
     st.image("assets/mylogo.png", width=200)
     st.subheader("Type in a few ingredients, and get a recipe from them!")

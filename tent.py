@@ -10,6 +10,10 @@ from recipe.recipe_search import run_recipe_app
 import streamlit.components.v1 as components
 
 API_KEY = st.secrets["SPOONACULAR_API_KEY"]
+st.set_page_config(
+        page_title="RecipeTent",
+        page_icon="RecipeTent_favicon.png",
+    )
 
 # Inject Microsoft Clarity script
 components.html(
@@ -104,8 +108,9 @@ def admin_view():
 # ------------------------
 def main():
     st.sidebar.title("🧭 Navigation")
-    mode = st.sidebar.selectbox("Choose a view", ["User Feedback", "Admin Dashboard"])
-    if mode == "User Feedback":
+    
+    mode = st.sidebar.selectbox("Page selection", ["Main App", "Admin Dashboard"])
+    if mode == "Main App":
         run_recipe_app()
         feedback_form()
     else:
